@@ -3,13 +3,11 @@ import * as joi from 'joi';
 
 interface EnvVars {
   NATS_SERVERS: string[];
-  MQTT_URL: string;
 }
 
 const envsSchema = joi
   .object({
     NATS_SERVERS: joi.array().items(joi.string()).required(),
-    MQTT_URL: joi.string().uri().required(),
   })
   .unknown(true);
 
@@ -27,8 +25,5 @@ const envVars: EnvVars = value;
 export const envs = {
   nats: {
     servers: envVars.NATS_SERVERS,
-  },
-  mqtt: {
-    url: envVars.MQTT_URL,
   },
 };
